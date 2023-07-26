@@ -1,17 +1,18 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
 import { Input } from '../../components';
-import PRODUCTS from '../../constants/data/products.json';
 import { COLORS } from '../../themes';
 
-function Product({ onHandleGoBack, categorySelected }) {
+function Product({ navigation, route }) {
+  const { categoryId, color } = route.params;
+  const products = useSelector((state) => state.products.data);
   const [search, setSearch] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const borderColor = useState(COLORS.darkGray);
-
+  const [borderColor, setBorderColor] = useState(COLORS.primary);
   const onHandleBlur = () => {};
   const onHandleChangeText = (text) => {
     setSearch(text);
@@ -19,8 +20,8 @@ function Product({ onHandleGoBack, categorySelected }) {
   };
   const onHandleFocus = () => {};
 
-  const filteredProductsByCategory = PRODUCTS.filter(
-    (product) => product.categoryId === categorySelected.categoryId
+  const filteredProductsByCategory = products.filter(
+    (product) => product.categoryId === categoryId
   );
 
   const filterBySearch = (query) => {
@@ -38,12 +39,12 @@ function Product({ onHandleGoBack, categorySelected }) {
     setFilteredProducts([]);
   };
 
+  const onSelectProduct = ({ productId, name }) => {
+    navigation.navigate('ProductDetail', { productId, color, name });
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.goBack} onPress={onHandleGoBack}>
-        <Ionicons name="arrow-back-circle" size={30} color={COLORS.darkGray} />
-        <Text style={styles.goBackText}>Go back</Text>
-      </TouchableOpacity>
       <View style={styles.header}>
         <Input
           onHandleBlur={onHandleBlur}
@@ -59,7 +60,7 @@ function Product({ onHandleGoBack, categorySelected }) {
             onPress={clearSearch}
             name="close-circle"
             size={20}
-            color={COLORS.darkGray}
+            color={COLORS.black}
           />
         )}
       </View>
@@ -67,10 +68,12 @@ function Product({ onHandleGoBack, categorySelected }) {
         style={styles.products}
         data={search.length > 0 ? filteredProducts : filteredProductsByCategory}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => null} style={styles.productContainer}>
+          <TouchableOpacity
+            onPress={() => onSelectProduct({ productId: item.id, name: item.name })}
+            style={styles.productContainer}>
             <ImageBackground
               source={{ uri: item.image }}
-              style={[styles.productImage, { backgroundColor: COLORS.lightGray }]}
+              style={[styles.productImage, { backgroundColor: color }]}
               resizeMethod="resize"
               resizeMode="contain"
             />
