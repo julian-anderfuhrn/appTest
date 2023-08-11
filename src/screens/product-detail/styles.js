@@ -47,4 +47,25 @@ export const styles = StyleSheet.create({
   tag: {
     color: COLORS.white,
   },
+  containerButton: {
+    marginVertical: 10,
+  },
+  addToCartButton: {
+    width: '100%',
+    backgroundColor: COLORS.primary,
+    padding: 15,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addToCartText: {
+    fontFamily: FONTS.medium,
+    fontSize: 16,
+    color: COLORS.white,
+  },
+  containerLoader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

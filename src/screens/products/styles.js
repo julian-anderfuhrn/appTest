@@ -6,11 +6,12 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 15,
+    marginTop: 15,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    gap: 5,
   },
   goBack: {
     flexDirection: 'row',
@@ -19,7 +20,7 @@ export const styles = StyleSheet.create({
   },
   goBackText: {
     fontSize: 14,
-    color: COLORS.darkGray,
+    color: COLORS.text,
   },
   products: {
     flex: 1,
@@ -27,12 +28,8 @@ export const styles = StyleSheet.create({
   notFound: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  notFoundText: {
-    fontSize: 16,
-    color: COLORS.darkGray,
-  },
+  notFoundText: {},
   clearIcon: {
     position: 'absolute',
     zIndex: 2,
@@ -40,33 +37,32 @@ export const styles = StyleSheet.create({
   },
   productsContent: {
     paddingVertical: 25,
-    paddingHorizontal: 5,
+    gap: 15,
   },
   productContainer: {
-    backgroundColor: COLORS.lightGray,
+    backgroundColor: COLORS.background,
     borderRadius: 10,
     width: '45%',
-    marginHorizontal: 5,
-    marginBottom: 10,
+    marginHorizontal: 10,
   },
   productImage: {
     width: '100%',
     height: 150,
-    justifyContent: 'flex-end',
-    borderRadius: 10,
-    overflow: 'hidden',
   },
   productDetail: {
     padding: 10,
+    gap: 5,
   },
   productName: {
     fontSize: 14,
-    color: COLORS.darkGray,
   },
   productPrice: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: COLORS.black,
-    marginTop: 5,
+  },
+  containerLoader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
